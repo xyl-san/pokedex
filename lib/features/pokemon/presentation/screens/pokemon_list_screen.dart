@@ -18,7 +18,16 @@ class PokemonListScreen extends ConsumerWidget {
           message: error.toString(),
           onRetry: () => ref.refresh(pokemonListProvider),
         ),
-        data: (pokemonList) => PokemonGridView(pokemonList: pokemonList),
+        data: (pokemonList) => RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(pokemonListProvider);
+            await ref.read(pokemonListProvider.future);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PokemonGridView(pokemonList: pokemonList),
+          ),
+        ),
       ),
     );
   }
@@ -28,7 +37,7 @@ class _ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const _ErrorView({super.key, required this.message, required this.onRetry});
+  const _ErrorView({required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {

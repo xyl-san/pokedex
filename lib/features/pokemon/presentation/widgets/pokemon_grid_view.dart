@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pokedex/features/pokemon/domain/pokemon.dart';
 import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_grid_tile.dart';
 
@@ -17,7 +18,12 @@ class PokemonGridView extends StatelessWidget {
       ),
       itemCount: pokemonList.length, // Replace with your actual item count
       itemBuilder: (context, index) {
-        return PokemonGridTile(pokemon: pokemonList[index]);
+        return PokemonGridTile(
+          pokemon: pokemonList[index],
+          onTap: () {
+            context.push('/pokemon/${pokemonList[index].id}');
+          },
+        );
       },
     );
   }

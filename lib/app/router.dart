@@ -8,16 +8,16 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/pokemon',
       builder: (context, state) => const PokemonListScreen(),
-      // routes: <RouteBase>[
-      //   GoRoute(
-      //     path: ':id',
-      //     builder: (context, state) {
-      //       final id = int.tryParse(state.pathParameters['id'] ?? '');
-      //       if (id == null) return const PokemonListScreen();
-      //       return PokemonDetailsScreen(pokemonId: id);
-      //     },
-      //   ),
-      // ],
+      routes: <RouteBase>[
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final id = int.tryParse(state.pathParameters['id'] ?? '');
+            if (id == null) return const PokemonListScreen();
+            return PokemonDetailsScreen(pokemonId: id);
+          },
+        ),
+      ],
     ),
   ],
 );
