@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/app/router.dart';
 import 'package:pokedex/app/theme.dart';
-import 'package:pokedex/features/pokemon/presentation/screens/pokemon_list_screen.dart';
 
 void main() {
-  runApp(
-    const MyApp(),
-  );
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,12 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Pokedex App',
       theme: AppTheme.light,
       // darkTheme: AppTheme.dark,
-      home: const PokemonListScreen(),
+      routerConfig: appRouter,
     );
   }
 }

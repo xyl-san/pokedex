@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/features/pokemon/data/sample_pokemon.dart';
+import 'package:pokedex/features/pokemon/domain/pokemon.dart';
 import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_grid_tile.dart';
 
 class PokemonGridView extends StatelessWidget {
-  const PokemonGridView({super.key});
+  final List<Pokemon> pokemonList;
+  const PokemonGridView({super.key, required this.pokemonList});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,9 @@ class PokemonGridView extends StatelessWidget {
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
       ),
-      itemCount: samplePokemon.length, // Replace with your actual item count
+      itemCount: pokemonList.length, // Replace with your actual item count
       itemBuilder: (context, index) {
-        return PokemonGridTile(pokemon: samplePokemon[index]);
+        return PokemonGridTile(pokemon: pokemonList[index]);
       },
     );
   }
