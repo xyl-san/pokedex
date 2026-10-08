@@ -1,5 +1,6 @@
 import 'package:pokedex/features/pokemon/data/sample_pokemon.dart';
 import 'package:pokedex/features/pokemon/domain/pokemon.dart';
+import 'package:pokedex/features/pokemon/domain/pokemon_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'pokemon_repository.g.dart';
@@ -12,7 +13,10 @@ class PokemonRepository {
 
   Future<Pokemon> getById(int id) async {
     await Future.delayed(const Duration(milliseconds: 600));
-    return samplePokemon.firstWhere((pokemon) => pokemon.id == id);
+    for (final p in samplePokemon) {
+      if (p.id == id) return p;
+    }
+    throw PokemonNotFoundException(id);
   }
 }
 
@@ -22,13 +26,13 @@ PokemonRepository pokemonRepository(Ref ref) {
 }
 
 @riverpod
-FutureOr<List<Pokemon>> pokemonList(Ref ref) async {
+Future<List<Pokemon>> pokemonList(Ref ref) {
   final repo = ref.watch(pokemonRepositoryProvider);
   return repo.getAll();
 }
 
 @riverpod
-FutureOr<Pokemon> pokemonById(Ref ref, int id) async {
+Future<Pokemon> pokemonById(Ref ref, int id) {
   final repo = ref.watch(pokemonRepositoryProvider);
   return repo.getById(id);
 }

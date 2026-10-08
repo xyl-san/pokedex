@@ -14,7 +14,7 @@ final GoRouter appRouter = GoRouter(
           builder: (context, state) {
             final id = int.tryParse(state.pathParameters['id'] ?? '');
             if (id == null) return const PokemonListScreen();
-            return PokemonDetailsScreen(pokemonId: id);
+            return PokemonDetailsScreen(id: id);
           },
         ),
       ],

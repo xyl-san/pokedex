@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pokedex App',
       theme: AppTheme.light,
-      // darkTheme: AppTheme.dark,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
       routerConfig: appRouter,
     );
   }

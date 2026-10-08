@@ -3,21 +3,25 @@ import 'package:pokedex/features/pokemon/domain/pokemon_type.dart';
 
 class TypeBadge extends StatelessWidget {
   final PokemonType type;
-  const TypeBadge({super.key, required this.type});
+  final bool large;
+  const TypeBadge({super.key, required this.type, this.large = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: EdgeInsets.symmetric(
+        horizontal: large ? 14 : 8,
+        vertical: large ? 5 : 2,
+      ),
       decoration: BoxDecoration(
         color: type.color,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(large ? 14 : 10),
       ),
       child: Text(
         type.displayName,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
-          fontSize: 10,
+          fontSize: large ? 13 : 10,
           fontWeight: FontWeight.w600,
         ),
       ),

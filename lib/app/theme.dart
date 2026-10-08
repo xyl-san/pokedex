@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const _seed = Color.fromARGB(255, 255, 241, 46);
+  static const _seed = Color(0xFFDC0A2D); // Pokédex red
+
   static ThemeData get light => ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: _seed),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.amber,
+    appBarTheme: const AppBarTheme(
+      centerTitle: false,
+      elevation: 0,
     ),
   );
 
@@ -15,6 +17,10 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: _seed,
       brightness: Brightness.dark,
+    ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: false,
+      elevation: 0,
     ),
   );
 }

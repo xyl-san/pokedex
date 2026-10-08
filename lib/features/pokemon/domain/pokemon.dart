@@ -21,4 +21,6 @@ class Pokemon {
 
   String get formattedId => '#${id.toString().padLeft(3, '0')}';
   String get displayName => name[0].toUpperCase() + name.substring(1);
+  double get heightInMeters => height / 10;
+  double get weightInKg => weight / 10;
 }
