@@ -27,12 +27,12 @@ PokemonRepository pokemonRepository(Ref ref) {
 
 @riverpod
 Future<List<Pokemon>> pokemonList(Ref ref) {
-  final repo = ref.read(pokemonRepositoryProvider);
+  final repo = ref.watch(pokemonRepositoryProvider);
   return repo.getAll();
 }
 
 @riverpod
 Future<Pokemon> pokemonById(Ref ref, int id) {
-  final repo = ref.read(pokemonRepositoryProvider);
+  final repo = ref.watch(pokemonRepositoryProvider);
   return repo.getById(id);
 }

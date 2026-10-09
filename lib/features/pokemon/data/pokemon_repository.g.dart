@@ -93,7 +93,7 @@ final class PokemonListProvider
   }
 }
 
-String _$pokemonListHash() => r'0d83d5d00d1f7d3a531895c40ac87f7ac1e615b4';
+String _$pokemonListHash() => r'e969068e1b340ad27ebbdc50dafeae48e637def3';
 
 @ProviderFor(pokemonById)
 final pokemonByIdProvider = PokemonByIdFamily._();
@@ -144,7 +144,7 @@ final class PokemonByIdProvider
   }
 }
 
-String _$pokemonByIdHash() => r'1a0b74ccfb68f5d00aaa28b79b912696b7a64c02';
+String _$pokemonByIdHash() => r'1a7b54e7cc45d60506c04cb4b06ac7bc55bd629c';
 
 final class PokemonByIdFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<Pokemon>, int> {
