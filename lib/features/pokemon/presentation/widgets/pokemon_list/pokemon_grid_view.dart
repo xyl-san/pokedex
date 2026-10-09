@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pokedex/features/pokemon/domain/pokemon.dart';
-import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_grid_tile.dart';
+import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_list/pokemon_grid_tile.dart';
 
 class PokemonGridView extends StatelessWidget {
   final List<Pokemon> pokemonList;
@@ -21,6 +21,7 @@ class PokemonGridView extends StatelessWidget {
         return PokemonGridTile(
           pokemon: pokemonList[index],
           onTap: () {
+            debugPrint('Tapped on ${pokemonList[index].name}');
             context.push('/pokemon/${pokemonList[index].id}');
           },
         );

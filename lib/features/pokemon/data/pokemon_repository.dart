@@ -7,12 +7,12 @@ part 'pokemon_repository.g.dart';
 
 class PokemonRepository {
   Future<List<Pokemon>> getAll() async {
-    await Future.delayed(const Duration(milliseconds: 600));
+    await Future.delayed(const Duration(seconds: 3));
     return samplePokemon;
   }
 
   Future<Pokemon> getById(int id) async {
-    await Future.delayed(const Duration(milliseconds: 600));
+    await Future.delayed(const Duration(seconds: 3));
     for (final p in samplePokemon) {
       if (p.id == id) return p;
     }
@@ -27,12 +27,12 @@ PokemonRepository pokemonRepository(Ref ref) {
 
 @riverpod
 Future<List<Pokemon>> pokemonList(Ref ref) {
-  final repo = ref.watch(pokemonRepositoryProvider);
+  final repo = ref.read(pokemonRepositoryProvider);
   return repo.getAll();
 }
 
 @riverpod
 Future<Pokemon> pokemonById(Ref ref, int id) {
-  final repo = ref.watch(pokemonRepositoryProvider);
+  final repo = ref.read(pokemonRepositoryProvider);
   return repo.getById(id);
 }

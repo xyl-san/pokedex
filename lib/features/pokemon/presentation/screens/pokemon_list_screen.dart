@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/features/pokemon/data/pokemon_repository.dart';
 import 'package:pokedex/features/pokemon/domain/pokemon_exception.dart';
-import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_grid_view.dart';
+import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_list/pokemon_grid_view.dart';
+import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_list/skeleton_grid.dart';
 
 class PokemonListScreen extends ConsumerWidget {
   const PokemonListScreen({super.key}); // fixed the constructor name
@@ -12,22 +13,21 @@ class PokemonListScreen extends ConsumerWidget {
     final pokemonListAsyncValue = ref.watch(pokemonListProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pokédex'),
-        // No backgroundColor — let Material 3 pick it from the scheme.
-      ),
-      body: pokemonListAsyncValue.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => _ErrorView(
-          error: error,
-          onRetry: () => ref.invalidate(pokemonListProvider),
-        ),
-        data: (pokemonList) => RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(pokemonListProvider);
-            await ref.read(pokemonListProvider.future);
-          },
-          child: PokemonGridView(pokemonList: pokemonList),
+      appBar: AppBar(title: const Text('Pokédex')),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ref.invalidate(pokemonListProvider);
+          await ref.read(pokemonListProvider.future);
+        },
+        child: pokemonListAsyncValue.when(
+          skipLoadingOnRefresh: true,
+          skipLoadingOnReload: true,
+          loading: () => SkeletonGrid(),
+          error: (error, _) => _ErrorView(
+            error: error,
+            onRetry: () => ref.invalidate(pokemonListProvider),
+          ),
+          data: (pokemonList) => PokemonGridView(pokemonList: pokemonList),
         ),
       ),
     );
@@ -44,7 +44,6 @@ class _ErrorView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
 
-    // Show a friendly message based on our sealed exception hierarchy.
     final (icon, title, message) = switch (error) {
       PokemonNetworkException(:final message) => (
         Icons.wifi_off_rounded,

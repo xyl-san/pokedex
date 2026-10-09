@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/features/pokemon/domain/pokemon.dart';
-import 'package:pokedex/features/pokemon/presentation/widgets/pokemon_type_badge.dart';
+import 'package:pokedex/features/pokemon/presentation/widgets/shared/pokemon_type_badge.dart';
 
 class PokemonGridTile extends StatelessWidget {
   final Pokemon pokemon;
   final VoidCallback? onTap;
 
-  const PokemonGridTile({
-    super.key,
-    required this.pokemon,
-    this.onTap,
-  });
+  const PokemonGridTile({super.key, required this.pokemon, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +48,9 @@ class PokemonGridTile extends StatelessWidget {
                       color: mutedFg,
                     ),
                   ),
-                  Icon(
-                    Icons.catching_pokemon,
-                    size: 16,
-                    color: faintFg,
-                  ),
+                  Icon(Icons.catching_pokemon, size: 16, color: faintFg),
                 ],
               ),
-
-              // Image
               Expanded(
                 child: Center(
                   child: Hero(
@@ -68,7 +58,7 @@ class PokemonGridTile extends StatelessWidget {
                     child: Image.network(
                       pokemon.imageUrl,
                       fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) => Icon(
+                      errorBuilder: (_, _, _) => Icon(
                         Icons.catching_pokemon,
                         size: 48,
                         color: faintFg,
